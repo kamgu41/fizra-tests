@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#2563eb">
+<title>Тесты · Физическая культура</title>
+<style>
+:root{
+  --blue:#2563eb;--blue-d:#1d4ed8;--bg:#eef1f6;--card:#fff;
+  --text:#111827;--muted:#6b7280;--line:#d7dce5;
+  --green:#16a34a;--red:#dc2626;--amber:#d97706;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  background:var(--bg);color:var(--text);font-size:17px;line-height:1.45;
+  -webkit-text-size-adjust:100%;
+}
+.wrap{max-width:620px;margin:0 auto;padding:18px 16px 40px}
+h1{font-size:22px;margin:0 0 4px;font-weight:800;letter-spacing:-.3px}
+.sub{color:var(--muted);font-size:14px;margin:0 0 20px}
+.sub a{color:var(--blue);text-decoration:none;font-weight:600}
+.card{background:var(--card);border-radius:14px;padding:16px;margin-bottom:12px;box-shadow:0 1px 3px rgba(16,24,40,.06)}
+label{display:block;font-size:14px;font-weight:600;color:var(--muted);margin-bottom:6px}
+input[type=text]{
+  width:100%;padding:14px;font-size:17px;border:2px solid var(--line);
+  border-radius:12px;background:#fff;color:var(--text);outline:none;font-family:inherit;
+}
+input[type=text]:focus{border-color:var(--blue)}
+.field{margin-bottom:14px}
+.btn{
+  display:block;width:100%;padding:16px;font-size:17px;font-weight:700;
+  border:none;border-radius:12px;background:var(--blue);color:#fff;
+  cursor:pointer;font-family:inherit;transition:.15s;
+}
+.btn:active{background:var(--blue-d);transform:scale(.99)}
+.btn[disabled]{background:#c3cad6}
+.btn.ghost{background:#fff;color:var(--blue);border:2px solid var(--line)}
+.btn.ghost:active{background:#f3f6fb}
+.test-item{
+  display:flex;align-items:center;gap:14px;
+  background:#fff;border-radius:14px;padding:16px;margin-bottom:10px;
+  cursor:pointer;box-shadow:0 1px 3px rgba(16,24,40,.06);
+  transition:.15s;border:2px solid transparent;
+}
+.test-item:active{background:#f7f9fc;border-color:#dbe4f5}
+.test-item .num{
+  flex:0 0 42px;height:42px;border-radius:11px;background:#eaf0fe;color:var(--blue);
+  display:flex;align-items:center;justify-content:center;font-weight:800;font-size:15px;
+}
+.test-item .tt{flex:1;min-width:0}
+.test-item .tt b{display:block;font-size:16px;font-weight:700;line-height:1.3}
+.test-item .tt span{display:block;font-size:13px;color:var(--muted);margin-top:3px}
+.qtop{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:10px}
+.qtop .cnt{font-size:14px;font-weight:700;color:var(--blue)}
+.qtop .exit{background:none;border:none;font-size:14px;color:var(--muted);font-family:inherit;cursor:pointer;padding:6px 0}
+.bar{height:7px;background:#dde3ec;border-radius:99px;overflow:hidden;margin-bottom:18px}
+.bar i{display:block;height:100%;background:var(--blue);border-radius:99px;transition:width .25s}
+.qtext{font-size:19px;font-weight:700;line-height:1.4;margin-bottom:8px}
+.qhint{font-size:13px;color:var(--amber);font-weight:600;margin-bottom:12px}
+.opt{
+  display:flex;gap:12px;align-items:flex-start;
+  background:#fff;border:2px solid var(--line);border-radius:13px;
+  padding:14px 15px;margin-bottom:10px;cursor:pointer;
+  transition:.12s;font-size:16px;line-height:1.4;
+}
+.opt:active{background:#f7f9fc}
+.opt.sel{border-color:var(--blue);background:#eff4ff}
+.opt .mk{
+  flex:0 0 24px;height:24px;border:2px solid #b9c2d0;background:#fff;
+  display:flex;align-items:center;justify-content:center;
+  margin-top:1px;transition:.12s;color:#fff;font-size:14px;font-weight:900;
+}
+.opt .mk.r{border-radius:50%}
+.opt .mk.c{border-radius:6px}
+.opt.sel .mk{background:var(--blue);border-color:var(--blue)}
+.opt .tx{flex:1}
+.navbar{
+  position:fixed;left:0;right:0;bottom:0;background:rgba(255,255,255,.97);
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  border-top:1px solid var(--line);z-index:20;
+  padding:12px 16px calc(12px + env(safe-area-inset-bottom));
+}
+.navbar .inner{max-width:620px;margin:0 auto}
+.padnav{padding-bottom:110px}
+.res-card{background:#fff;border-radius:18px;padding:26px 20px;text-align:center;box-shadow:0 2px 12px rgba(16,24,40,.08)}
+.res-title{font-size:13px;letter-spacing:1.5px;font-weight:800;color:var(--muted);text-transform:uppercase;margin-bottom:18px}
+.res-name{font-size:25px;font-weight:800;line-height:1.25;letter-spacing:-.4px;word-break:break-word}
+.res-group{font-size:17px;color:var(--muted);font-weight:600;margin-top:6px}
+.res-line{height:1px;background:var(--line);margin:20px 0}
+.res-test{font-size:14px;color:var(--muted);line-height:1.4}
+.res-score{font-size:56px;font-weight:900;line-height:1;letter-spacing:-2px;margin:16px 0 6px}
+.res-score small{font-size:24px;font-weight:800;color:var(--muted)}
+.res-pct{font-size:15px;color:var(--muted);font-weight:600}
+.res-grade{display:inline-block;margin-top:16px;padding:10px 26px;border-radius:99px;font-size:22px;font-weight:900;color:#fff}
+.g5{background:var(--green)}.g4{background:#0ea5e9}.g3{background:var(--amber)}.g2{background:var(--red)}
+.res-meta{margin-top:20px;font-size:13px;color:var(--muted)}
+.res-code{
+  margin-top:12px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+  font-size:15px;font-weight:700;letter-spacing:2px;color:var(--text);
+  background:#f1f4f9;border-radius:10px;padding:10px 14px;display:inline-block;
+}
+</style>
+</head>
+<body>
+<div class="wrap" id="app"></div>
+<script>const TESTS = [];</script>
+<script src="tests-01.js"></script>
+<script src="tests-02.js"></script>
+<script src="tests-03.js"></script>
+<script src="tests-04.js"></script>
+<script src="tests-05.js"></script>
+<script src="tests-06.js"></script>
+<script src="tests-07.js"></script>
+<script src="tests-08.js"></script>
+<script src="tests-09.js"></script>
+<script>
+const app = document.getElementById('app');
+const GRADE_SCALE = [{min:90,g:5},{min:75,g:4},{min:60,g:3},{min:0,g:2}];
+const S = { fio:'', group:'', test:null, answers:[], qi:0 };
+
+function saveUser(){ try{localStorage.setItem('fizra_user',JSON.stringify({fio:S.fio,group:S.group}));}catch(e){} }
+function loadUser(){ try{return JSON.parse(localStorage.getItem('fizra_user'))||{};}catch(e){return {};} }
+function esc(s){ return String(s).replace(/[&<>"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m])); }
+function pad(n){ return String(n).padStart(2,'0'); }
+function plural(n,a,b,c){ const n10=n%10,n100=n%100;
+  if(n10===1&&n100!==11) return a;
+  if(n10>=2&&n10<=4&&(n100<10||n100>=20)) return b;
+  return c;
+}
+function sameSet(a,b){
+  if(!a||!b||a.length!==b.length) return false;
+  const A=a.slice().sort((x,y)=>x-y), B=b.slice().sort((x,y)=>x-y);
+  return A.every((v,i)=>v===B[i]);
+}
+function makeCode(str){
+  let h=0; for(let i=0;i<str.length;i++){ h=(h*31+str.charCodeAt(i))|0; }
+  h=Math.abs(h).toString(36).toUpperCase(); while(h.length<6) h='0'+h;
+  return h.slice(0,3)+'-'+h.slice(3,6);
+}
+
+/* ---------- ЭКРАН 1: СТАРТ ---------- */
+function screenStart(){
+  const u = loadUser();
+  app.innerHTML = `
+  <h1>Тесты по физической культуре</h1>
+  <p class="sub">Введите данные, затем выберите тест</p>
+  <div class="card">
+    <div class="field">
+      <label>Фамилия и имя</label>
+      <input type="text" id="fio" placeholder="Иванов Иван" value="${esc(u.fio||'')}" autocomplete="name">
+    </div>
+    <div class="field">
+      <label>Группа</label>
+      <input type="text" id="grp" placeholder="ФК-21" value="${esc(u.group||'')}" autocomplete="off">
+    </div>
+    <button class="btn" id="go">К списку тестов</button>
+  </div>`;
+  document.getElementById('go').onclick = ()=>{
+    const f=document.getElementById('fio').value.trim();
+    const g=document.getElementById('grp').value.trim();
+    if(!f||!g){ alert('Заполните ФИО и группу'); return; }
+    S.fio=f; S.group=g; saveUser(); screenList();
+    window.scrollTo(0,0);
+  };
+}
+
+/* ---------- ЭКРАН 2: СПИСОК ТЕСТОВ ---------- */
+function screenList(){
+  const items = TESTS.map((t,i)=>`
+    <div class="test-item" data-i="${i}">
+      <div class="num">${i+1}</div>
+      <div class="tt">
+        <b>${esc(t.title)}</b>
+        <span>${t.questions.length} ${plural(t.questions.length,'вопрос','вопроса','вопросов')}</span>
+      </div>
+    </div>`).join('');
+  app.innerHTML = `
+  <h1>Выберите тест</h1>
+  <p class="sub">${esc(S.fio)} · ${esc(S.group)} &nbsp;<a href="#" id="chg">изменить</a></p>
+  ${items}`;
+  document.getElementById('chg').onclick = (e)=>{ e.preventDefault(); screenStart(); };
+  app.querySelectorAll('.test-item').forEach(el=>{
+    el.onclick = ()=>{
+      S.test = TESTS[+el.dataset.i];
+      S.answers = []; S.qi = 0;
+      screenQuiz(); window.scrollTo(0,0);
+    };
+  });
+}
+
+/* ---------- ЭКРАН 3: ВОПРОС ---------- */
+function screenQuiz(){
+  const t = S.test, q = t.questions[S.qi], total = t.questions.length;
+  const multi = q.c.length > 1;
+  const cur = S.answers[S.qi] || [];
+  const opts = q.a.map((text,i)=>{
+    const sel = cur.includes(i);
+    return `<div class="opt${sel?' sel':''}" data-i="${i}">
+      <div class="mk ${multi?'c':'r'}">${sel?'✓':''}</div>
+      <div class="tx">${esc(text)}</div>
+    </div>`;
+  }).join('');
+  app.innerHTML = `
+  <div class="padnav">
+    <div class="qtop">
+      <div class="cnt">Вопрос ${S.qi+1} из ${total}</div>
+      <button class="exit" id="exit">Выйти</button>
+    </div>
+    <div class="bar"><i style="width:${(S.qi+1)/total*100}%"></i></div>
+    <div class="qtext">${esc(q.q)}</div>
+    ${multi ? '<div class="qhint">Выберите несколько вариантов</div>' : '<div style="height:12px"></div>'}
+    ${opts}
+  </div>
+  <div class="navbar"><div class="inner">
+    <button class="btn" id="next" ${cur.length?'':'disabled'}>
+      ${S.qi===total-1?'Завершить тест':'Далее'}
+    </button>
+  </div></div>`;
+  app.querySelectorAll('.opt').forEach(el=>{
+    el.onclick = ()=>{
+      const i = +el.dataset.i;
+      let c = S.answers[S.qi] || [];
+      c = multi ? (c.includes(i) ? c.filter(x=>x!==i) : c.concat(i)) : [i];
+      S.answers[S.qi] = c;
+      screenQuiz();
+    };
+  });
+  document.getElementById('next').onclick = ()=>{
+    if(S.qi === total-1){ screenResult(); }
+    else { S.qi++; screenQuiz(); window.scrollTo(0,0); }
+  };
+  document.getElementById('exit').onclick = ()=>{
+    if(confirm('Выйти из теста? Ответы не сохранятся.')){ screenList(); window.scrollTo(0,0); }
+  };
+}
+
+/* ---------- ЭКРАН 4: РЕЗУЛЬТАТ ---------- */
+function screenResult(){
+  const t = S.test, total = t.questions.length;
+  let correct = 0;
+  t.questions.forEach((q,i)=>{ if(sameSet(S.answers[i]||[], q.c)) correct++; });
+  const pct = Math.round(correct/total*100);
+  const gr = GRADE_SCALE.find(x=>pct>=x.min).g;
+  const now = new Date();
+  const dt = pad(now.getDate())+'.'+pad(now.getMonth()+1)+'.'+now.getFullYear()+'  '+pad(now.getHours())+':'+pad(now.getMinutes());
+  const c = makeCode(S.fio+'|'+S.group+'|'+t.id+'|'+correct+'|'+total+'|'+now.getTime());
+
+  app.innerHTML = `
+  <div class="res-card">
+    <div class="res-title">Результат тестирования</div>
+    <div class="res-name">${esc(S.fio)}</div>
+    <div class="res-group">Группа: ${esc(S.group)}</div>
+    <div class="res-line"></div>
+    <div class="res-test">${esc(t.title)}</div>
+    <div class="res-score">${correct}<small> / ${total}</small></div>
+    <div class="res-pct">правильных ответов · ${pct}%</div>
+    <div class="res-grade g${gr}">Оценка: ${gr}</div>
+    <div class="res-meta">${dt}</div>
+    <div class="res-code">${c}</div>
+  </div>
+  <div style="height:16px"></div>
+  <button class="btn ghost" id="again">Пройти ещё раз</button>
+  <div style="height:10px"></div>
+  <button class="btn ghost" id="toList">К списку тестов</button>`;
+  document.getElementById('again').onclick = ()=>{ S.answers=[]; S.qi=0; screenQuiz(); window.scrollTo(0,0); };
+  document.getElementById('toList').onclick = ()=>{ S.test=null; screenList(); window.scrollTo(0,0); };
+}
+
+screenStart();
+</script>
+</body>
+</html>
