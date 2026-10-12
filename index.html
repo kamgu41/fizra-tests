@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#2563eb">
-<title>Тесты · Физическая культура</title>
+<title>Тесты · Методика обучения и воспитания</title>
 <style>
 :root{
   --blue:#2563eb;--blue-d:#1d4ed8;--bg:#eef1f6;--card:#fff;
@@ -118,7 +118,7 @@ input[type=text]:focus{border-color:var(--blue)}
 <script src="tests-09.js"></script>
 <script>
 const app = document.getElementById('app');
-const GRADE_SCALE = [{min:90,g:5},{min:75,g:4},{min:60,g:3},{min:0,g:2}];
+const GRADE_SCALE = [{min:100,g:5},{min:80,g:4},{min:70,g:3},{min:0,g:2}];
 const S = { fio:'', group:'', test:null, answers:[], qi:0 };
 
 function saveUser(){ try{localStorage.setItem('fizra_user',JSON.stringify({fio:S.fio,group:S.group}));}catch(e){} }
@@ -145,7 +145,7 @@ function makeCode(str){
 function screenStart(){
   const u = loadUser();
   app.innerHTML = `
-  <h1>Тесты по физической культуре</h1>
+  <h1>Методика обучения и воспитания</h1>
   <p class="sub">Введите данные, затем выберите тест</p>
   <div class="card">
     <div class="field">
@@ -172,9 +172,8 @@ function screenList(){
   const items = TESTS.map((t,i)=>`
     <div class="test-item" data-i="${i}">
       <div class="num">${i+1}</div>
-      <div class="tt">
+            <div class="tt">
         <b>${esc(t.title)}</b>
-        <span>${t.questions.length} ${plural(t.questions.length,'вопрос','вопроса','вопросов')}</span>
       </div>
     </div>`).join('');
   app.innerHTML = `
